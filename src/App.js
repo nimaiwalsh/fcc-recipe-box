@@ -7,7 +7,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        <RecipeList />
+        <Container>
+          <RecipeList />
+        </Container>
       </div>
     );
   }
@@ -22,4 +24,11 @@ injectGlobal`
     height: auto;
     font-family: 'Roboto', sans-serif;
   };
-`
+`;
+
+const Container = styled('div')({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  padding: '20px'
+});
