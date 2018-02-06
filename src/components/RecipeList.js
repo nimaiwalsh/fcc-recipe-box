@@ -1,19 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-import ListItem from './ListItem';
+import { Link } from 'react-router-dom';
+import _ from 'lodash';
 
 class RecipeList extends Component {
-  
   renderItem() {
     const { foodList } = this.props;
-    return foodList.map((item, key) => (
-      <ListItem key={key} name={item.name} ingredients={item.ingredients} />
-    ));
+    return _.map(foodList, (item, key) => {
+      return (
+        <li key={key}>
+          <Link to={`/${key}`}>{item.name} {key}</Link>
+        </li>
+      );
+    });
   }
 
   render() {
-    return <ul>{this.renderItem()}</ul>;
+    return (
+      <div>
+        <ul>{this.renderItem()}</ul>
+      </div>
+    );
   }
 }
 
