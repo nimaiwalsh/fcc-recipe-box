@@ -3,13 +3,15 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 
+import { Button } from './StyledComponents';
+
 class RecipeList extends Component {
   renderItem() {
     const { foodList } = this.props;
     return _.map(foodList, (item, key) => {
       return (
         <li key={key}>
-          <Link to={`/${key}`}>{item.name} {key}</Link>
+          <Link to={`/${key}`}>{item.name}</Link>
         </li>
       );
     });
@@ -19,6 +21,7 @@ class RecipeList extends Component {
     return (
       <div>
         <ul>{this.renderItem()}</ul>
+        <Link to={'/add-recipe'}><Button onClick={this.addRecipe}>Add Recipe</Button></Link>
       </div>
     );
   }

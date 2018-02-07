@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from './Buttons';
+import { Button } from './StyledComponents';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import RecipeList from './components/RecipeList';
 import RecipeIngredients from './components/RecipeIngredients';
+import AddRecipe from './components/AddRecipe';
 
 class App extends Component {
   render() {
@@ -14,8 +15,9 @@ class App extends Component {
         <Container>
           <BrowserRouter>
             <Switch>
+              <Route path='/add-recipe' component={AddRecipe} />
               <Route
-                path="/:id"
+                path='/:id'
                 //Pass React Router Route props to the component to render
                 render={routeProps => (
                   <RecipeIngredients
@@ -24,7 +26,7 @@ class App extends Component {
                   />
                 )}
               />
-              <Route path="/" component={RecipeList} />
+              <Route path='/' component={RecipeList} />
             </Switch>
           </BrowserRouter>
         </Container>
