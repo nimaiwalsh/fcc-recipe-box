@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { css } from 'react-emotion';
 import { Link } from 'react-router-dom';
 
-import { Heading2, Heading3, Button, Form } from './StyledComponents';
+import { Heading2, Heading3, Button, Button2, Form } from './StyledComponents';
+import { addRecipe } from '../actions/index';
 
-export default class AddRecipe extends Component {
+class AddRecipe extends Component {
   constructor(props) {
     super(props);
     this.state = {
       item: '',
-      ingredientList: ['lemon', 'tomato'],
+      recipeName: '', 
+      ingredientList: [],
       warning: ''
     };
   }
@@ -18,6 +21,10 @@ export default class AddRecipe extends Component {
     return this.state.ingredientList.map((item, key) => (
       <li key={key}>{item}</li>
     ));
+  }
+
+  handleNameInput = e => {
+    this.setState({ recipeName: e.target.value });
   }
 
   handleIngredientInput = e => {
@@ -36,6 +43,19 @@ export default class AddRecipe extends Component {
     this.setState({ ingredientList, item, warning });
   };
 
+  addRecipe = () => {
+    const { recipeName, ingredientList } = this.state;
+    //Ensure the recipe has a name and one ingredient before submitting
+    if (!recipeName && ingredientList.length < 1) {
+      return console.log('Please enter a recipe name and ingredients');
+    } else if (ingredientList.length < 1) {
+      return console.log('Enter atleast 1 ingredient')
+    } else if (!recipeName) {
+      return console.log('Please give your recipe a name')
+    }
+    this.props.addRecipe();
+  }
+
   render() {
     return (
       <div>
@@ -45,7 +65,11 @@ export default class AddRecipe extends Component {
         </Link>
         <div>
           <Heading3>Recipe name</Heading3>
-          <input />
+          <input 
+          name="recipe-name"
+          onChange={this.handleNameInput}
+          value={this.state.recipeName}
+          />
           <Heading3>Ingredients</Heading3>
           <ul>{this.renderIngredients()}</ul>
           <input
@@ -55,8 +79,11 @@ export default class AddRecipe extends Component {
           />
           <div>{this.state.warning}</div>
           <Button onClick={this.addIngredient}>Add ingredient</Button>
+          <Button2 onClick={this.addRecipe}>Add recipe</Button2>
         </div>
       </div>
     );
   }
 }
+
+export default connect(null, { addRecipe })(AddRecipe);
