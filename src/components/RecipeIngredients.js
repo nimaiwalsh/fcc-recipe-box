@@ -3,26 +3,34 @@ import { Button } from './StyledComponents';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import { deleteRecipe } from '../actions/'; 
+
 class RecipeIngredients extends Component {
-  handleClick() {
-    console.log('clicked');
+
+  handleDeleteRecipe = () => {
+    const recipeNumber = this.props.match.params.id;//React Router properties
+    this.props.deleteRecipe(recipeNumber, () => {
+      this.props.history.push('/');
+    })
   }
 
   render() {
     const { name, ingredients } = this.props.recipe;
+
     return (
       <div>
         <Link to={'/'} >
-          <div onClick={this.handleClick}>Back to recipes</div>
+          <Button>Back to recipes</Button>
         </Link>
         <h1>{name}</h1>
         <Button onClick={this.handleClick}>Edit ingredients</Button>
         <ul>
           <li>{ingredients}</li>
         </ul>
+        <Button red onClick={this.handleDeleteRecipe}>Delete recipe</Button>  
       </div>
     );
   }
 }
 
-export default RecipeIngredients;
+export default connect(null, { deleteRecipe })(RecipeIngredients)

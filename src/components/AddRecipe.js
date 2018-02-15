@@ -11,9 +11,10 @@ class AddRecipe extends Component {
     super(props);
     this.state = {
       item: '',
-      recipeName: '', 
+      recipeName: '',
       ingredientList: [],
-      warning: ''
+      warning: '',
+      submissionError: ''
     };
   }
 
@@ -25,7 +26,7 @@ class AddRecipe extends Component {
 
   handleNameInput = e => {
     this.setState({ recipeName: e.target.value });
-  }
+  };
 
   handleIngredientInput = e => {
     this.setState({ item: e.target.value });
@@ -34,7 +35,7 @@ class AddRecipe extends Component {
   addIngredient = () => {
     let { ingredientList, item, warning } = this.state;
     if (!item) {
-      warning = 'Add an ingredient'
+      warning = 'Add an ingredient';
     } else {
       ingredientList.push(item);
       warning = '';
@@ -47,16 +48,20 @@ class AddRecipe extends Component {
     const { recipeName, ingredientList } = this.state;
     //Ensure the recipe has a name and one ingredient before submitting
     if (!recipeName && ingredientList.length < 1) {
-      return console.log('Please enter a recipe name and ingredients');
+      return this.setState({ submissionError: 'Please enter a recipe name and ingredients' });
     } else if (ingredientList.length < 1) {
-      return console.log('Enter atleast 1 ingredient')
+      return this.setState({ submissionError: 'Enter atleast 1 ingredient' });
     } else if (!recipeName) {
-      return console.log('Please give your recipe a name')
+      return this.setState({ submissionError: 'Please give your recipe a name' });
     }
-    this.props.addRecipe();
-  }
+    //Call action creator addRecipe() to store recipe in global state return user to menu list
+    this.props.addRecipe(recipeName, ingredientList, () => {
+      this.props.history.push('/')
+    });
+  };
 
   render() {
+    console.log(this.state.submissionError)
     return (
       <div>
         <Heading2>Add recipe</Heading2>
@@ -65,10 +70,10 @@ class AddRecipe extends Component {
         </Link>
         <div>
           <Heading3>Recipe name</Heading3>
-          <input 
-          name="recipe-name"
-          onChange={this.handleNameInput}
-          value={this.state.recipeName}
+          <input
+            name="recipe-name"
+            onChange={this.handleNameInput}
+            value={this.state.recipeName}
           />
           <Heading3>Ingredients</Heading3>
           <ul>{this.renderIngredients()}</ul>
@@ -77,9 +82,10 @@ class AddRecipe extends Component {
             onChange={this.handleIngredientInput}
             value={this.state.item}
           />
-          <div>{this.state.warning}</div>
+          <div className='ingredient-error'>{this.state.warning}</div>
           <Button onClick={this.addIngredient}>Add ingredient</Button>
           <Button2 onClick={this.addRecipe}>Add recipe</Button2>
+          <div className='submission-error'>{this.state.submissionError}</div>
         </div>
       </div>
     );
