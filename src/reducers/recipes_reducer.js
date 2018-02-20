@@ -1,4 +1,4 @@
-import { ADD_RECIPE, DELETE_RECIPE } from '../actions/';
+import { ADD_RECIPE, DELETE_RECIPE, UPDATE_RECIPE } from '../actions/';
 
 const initial = {
   1: { name: 'Apple Pie', ingredients: ['Flour', 'Sugar', 'Apples', 'Eggs'] },
@@ -18,6 +18,9 @@ export default function(state = initial, action) {
       const newState = { ...state };
       delete newState[action.payload];
       return { ...newState };
+    case UPDATE_RECIPE:
+      const updatedrecipe = Object.assign({...state}, action.payload)
+      return updatedrecipe;
     default: 
       return state;
   }

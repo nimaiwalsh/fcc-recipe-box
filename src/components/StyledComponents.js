@@ -1,5 +1,11 @@
-import React from 'react';
-import styled, { css } from 'react-emotion';
+import styled from 'react-emotion';
+
+export const Container = styled('div')({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  padding: '20px'
+});
 
 export const Button = styled('button')( props => ({
   color: 'green',
@@ -14,16 +20,4 @@ export const Button2 = styled('button')({
   display: 'block'
 })
 
-export const Heading2 = styled('h2')({
-  color: 'blue'
-});
 
-export const Heading3 = styled('h2')({
-  color: 'green'
-});
-
-export const Form = styled('form')({
-  '& input': {
-    display: 'block'
-  }
-});

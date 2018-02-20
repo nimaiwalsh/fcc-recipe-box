@@ -1,5 +1,6 @@
 export const ADD_RECIPE = 'ADD_RECIPE';
 export const DELETE_RECIPE = 'DELETE_RECIPE';
+export const UPDATE_RECIPE = 'UPDATE_RECIPE';
 
 export function addRecipe(name, ingredients, callback) {
   callback();
@@ -10,6 +11,14 @@ export function addRecipe(name, ingredients, callback) {
   }
 }
 
+export function updateRecipe(key, name, ingredients, callback) {
+  callback()
+  return{
+    type: UPDATE_RECIPE,
+    payload: { [key] : {name: name, ingredients: ingredients} }
+  }
+}
+
 export function deleteRecipe(key, callback) {
   callback();
   return {
@@ -17,3 +26,4 @@ export function deleteRecipe(key, callback) {
     payload: key,
   }
 }
+

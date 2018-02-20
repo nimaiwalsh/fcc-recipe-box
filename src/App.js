@@ -1,28 +1,40 @@
 import React, { Component } from 'react';
-import styled, { css, injectGlobal } from 'react-emotion';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import './components/StyleGlobal';
+import { Container } from './components/StyledComponents';
+
 import RecipeList from './components/RecipeList';
 import RecipeIngredients from './components/RecipeIngredients';
-import AddRecipe from './components/AddRecipe';
+import AddEditRecipe from './components/AddEditRecipe';
 
 class App extends Component {
   render() {
+    const { recipes } = this.props
     return (
       <div>
         <h1>Recipe Box</h1>
         <Container>
           <BrowserRouter>
             <Switch>
-              <Route path='/add-recipe' component={AddRecipe} />
+              <Route path='/add-recipe' component={AddEditRecipe} />
+              <Route
+                path='/edit-recipe/:id'
+                render={routeProps => (
+                  <AddEditRecipe
+                  {...routeProps}
+                  recipe={recipes[routeProps.match.params.id]}
+                  />
+                )}
+              />
               <Route
                 path='/:id'
                 //Pass React Router Route props to the component to render
                 render={routeProps => (
                   <RecipeIngredients
                     {...routeProps}
-                    recipe={this.props.recipes[routeProps.match.params.id]}
+                    recipe={recipes[routeProps.match.params.id]}
                   />
                 )}
               />
@@ -42,19 +54,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, null)(App);
-
-injectGlobal`
-  html, body {
-    box-sizing: border-box;
-    margin: 0px;
-    height: auto;
-    font-family: 'Roboto', sans-serif;
-  };
-`;
-
-const Container = styled('div')({
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  padding: '20px'
-});

@@ -14,18 +14,26 @@ class RecipeIngredients extends Component {
     })
   }
 
+  renderIngredients = () => {
+    const { ingredients } = this.props.recipe;
+    return ingredients.map((item, key) => <li key={key}>{item}</li>); 
+  }
+
   render() {
-    const { name, ingredients } = this.props.recipe;
+    const { name } = this.props.recipe;
+    const { id } = this.props.match.params;
 
     return (
       <div>
         <Link to={'/'} >
           <Button>Back to recipes</Button>
         </Link>
-        <h1>{name}</h1>
-        <Button onClick={this.handleClick}>Edit ingredients</Button>
+        <h2>{name}</h2>
+        <Link to={`/edit-recipe/${id}`}>
+          <Button onClick={this.handleClick}>Edit recipe</Button>
+        </Link>
         <ul>
-          <li>{ingredients}</li>
+          {this.renderIngredients()}
         </ul>
         <Button red onClick={this.handleDeleteRecipe}>Delete recipe</Button>  
       </div>
