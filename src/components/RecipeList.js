@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 
+import { styles } from './RecipeList_style';
 import { Button } from './StyledComponents';
 
 class RecipeList extends Component {
@@ -19,7 +20,7 @@ class RecipeList extends Component {
 
   render() {
     return (
-      <div>
+      <div className={ styles }>
         <ul>{this.renderItem()}</ul>
         <Link to={'/add-recipe'}><Button onClick={this.addRecipe}>Add Recipe</Button></Link>
       </div>

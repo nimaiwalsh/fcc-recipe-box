@@ -1,4 +1,5 @@
 import { ADD_RECIPE, DELETE_RECIPE, UPDATE_RECIPE } from '../actions/';
+import { largestObjectKeyNumber } from '../util/index';
 
 const initial = {
   1: { name: 'Apple Pie', ingredients: ['Flour', 'Sugar', 'Apples', 'Eggs'] },
@@ -10,9 +11,8 @@ const initial = {
 export default function(state = initial, action) {
   switch(action.type) {
     case ADD_RECIPE:
-      //Increment the Recipe Count unique ID by 1
-      //Get the last object key and increment it by one
-      const ID = Object.keys(state).length + 1;
+      //Always ensure newest recipe has highest key value
+      const ID = largestObjectKeyNumber(state) + 1
       return { ...state, [ID]: action.payload.item };
     case DELETE_RECIPE:
       const newState = { ...state };
