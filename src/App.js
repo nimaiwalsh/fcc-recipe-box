@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { css } from 'react-emotion';
 
 import './components/StyleGlobal';
+import { styles } from './App_style';
 import { Container } from './components/StyledComponents';
 
 import RecipeList from './components/RecipeList';
@@ -55,10 +55,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, null)(App);
-
-const styles = css({
-  '& h1': {
-    color: 'blue',
-    textAlign: 'center',
-  }
-})

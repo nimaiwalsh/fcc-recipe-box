@@ -101,7 +101,7 @@ class AddEditRecipe extends Component {
     return (
       <div className={styles}>
         <Link to={'/'}>
-          <Button>Back to recipes</Button>
+          <Button secondary>Back to recipes</Button>
         </Link>
         <h2>{addOrUpdate} recipe</h2>
         <div>
@@ -129,7 +129,7 @@ class AddEditRecipe extends Component {
           />
           <div className="ingredient-error">{this.state.warning}</div>
           <Button onClick={this.addIngredient}>Add ingredient</Button>
-          <Button2 onClick={() => this.addUpdateRecipe(addOrUpdate)}>{addOrUpdate} recipe</Button2>
+          <Button primary onClick={() => this.addUpdateRecipe(addOrUpdate)}>{addOrUpdate} recipe</Button>
           <div className="submission-error">{this.state.submissionError}</div>
         </div>
       </div>

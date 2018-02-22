@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import _ from 'lodash';
 
 import { styles } from './RecipeList_style';
-import { Button } from './StyledComponents';
+import { Button, UL } from './StyledComponents';
 
 class RecipeList extends Component {
   renderItem() {
@@ -21,8 +21,8 @@ class RecipeList extends Component {
   render() {
     return (
       <div className={ styles }>
-        <ul>{this.renderItem()}</ul>
-        <Link to={'/add-recipe'}><Button onClick={this.addRecipe}>Add Recipe</Button></Link>
+        <UL>{this.renderItem()}</UL>
+        <Link to={'/add-recipe'}><Button primary onClick={this.addRecipe}>Add Recipe</Button></Link>
       </div>
     );
   }

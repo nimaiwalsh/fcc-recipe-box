@@ -26,16 +26,16 @@ class RecipeIngredients extends Component {
     return (
       <div>
         <Link to={'/'} >
-          <Button>Back to recipes</Button>
+          <Button secondary>Back to recipes</Button>
         </Link>
         <h2>{name}</h2>
         <Link to={`/edit-recipe/${id}`}>
-          <Button onClick={this.handleClick}>Edit recipe</Button>
+          <Button primary onClick={this.handleClick}>Edit recipe</Button>
         </Link>
         <ul>
           {this.renderIngredients()}
         </ul>
-        <Button red onClick={this.handleDeleteRecipe}>Delete recipe</Button>  
+        <Button warning onClick={this.handleDeleteRecipe}>Delete recipe</Button>  
       </div>
     );
   }
