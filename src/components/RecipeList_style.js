@@ -3,18 +3,9 @@ import { css } from 'react-emotion';
 export const styles = css({
   width: '80%',
   maxWidth: '400px',
-  'li > img': {
-    height: '20px',
-    position: 'absolute',
-    right: '10px',
-  },
-  '& button': {
-    margin: '0 auto',
-  },
   '& ul': {
   position: 'relative',
   listStyleType: 'none',
-  // borderRadius: '10px',
   border: 'none',
   margin: '0',
   padding: '0',
@@ -31,6 +22,9 @@ export const styles = css({
     color: '#FFF',
   },
   '& li > img': {
+    height: '20px',
+    position: 'absolute',
+    right: '10px',
     filter: 'none',
     transition: 'filter 0.3s linear',
   },

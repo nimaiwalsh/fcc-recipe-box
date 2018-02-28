@@ -1,6 +1,7 @@
 export const ADD_RECIPE = 'ADD_RECIPE';
 export const DELETE_RECIPE = 'DELETE_RECIPE';
 export const UPDATE_RECIPE = 'UPDATE_RECIPE';
+export const CACHED_RECIPES = 'CACHED_RECIPES';
 
 export function addRecipe(name, ingredients, callback) {
   callback();
@@ -24,6 +25,13 @@ export function deleteRecipe(key, callback) {
   return {
     type: DELETE_RECIPE,
     payload: key,
+  }
+}
+
+export function cachedRecipesToState(cachedRecipes) {
+  return {
+    type: CACHED_RECIPES,
+    payload: JSON.parse(cachedRecipes),
   }
 }
 

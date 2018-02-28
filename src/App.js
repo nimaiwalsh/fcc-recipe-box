@@ -9,8 +9,18 @@ import { Container } from './components/StyledComponents';
 import RecipeList from './components/RecipeList';
 import RecipeIngredients from './components/RecipeIngredients';
 import AddEditRecipe from './components/AddEditRecipe';
+import { cachedRecipesToState } from './actions';
 
 class App extends Component {
+  componentDidMount() {
+    //Retrive local storage if it exists
+    const cachedRecipes = localStorage.getItem('cachedRecipes');
+    //If local storage exists, update the current state with local storage state
+    if (cachedRecipes) {
+      this.props.cachedRecipesToState(cachedRecipes);
+    }
+  }
+
   render() {
     const { recipes } = this.props
     return (
@@ -54,4 +64,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, null)(App);
+export default connect(mapStateToProps, { cachedRecipesToState })(App);

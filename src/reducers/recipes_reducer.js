@@ -1,4 +1,4 @@
-import { ADD_RECIPE, DELETE_RECIPE, UPDATE_RECIPE } from '../actions/';
+import { ADD_RECIPE, DELETE_RECIPE, UPDATE_RECIPE, CACHED_RECIPES } from '../actions/';
 import { largestObjectKeyNumber } from '../util/index';
 
 const initial = {
@@ -9,20 +9,31 @@ const initial = {
 };
 
 export default function(state = initial, action) {
-  switch(action.type) {
+  switch (action.type) {
     case ADD_RECIPE:
-      //Always ensure newest recipe has highest key value
-      const ID = largestObjectKeyNumber(state) + 1
+      const ID = largestObjectKeyNumber(state) + 1;
+      //Store state in local storage
+      localStorage.setItem(
+        'cachedRecipes',
+        JSON.stringify({ ...state, [ID]: action.payload.item })
+      );
       return { ...state, [ID]: action.payload.item };
     case DELETE_RECIPE:
       const newState = { ...state };
       delete newState[action.payload];
+      //Remove from local storage
+      localStorage.setItem(
+        'cachedRecipes',
+        JSON.stringify({ ...newState })
+      );
       return { ...newState };
     case UPDATE_RECIPE:
-      const updatedrecipe = Object.assign({...state}, action.payload)
+      const updatedrecipe = Object.assign({ ...state }, action.payload);
       return updatedrecipe;
-    default: 
+    case CACHED_RECIPES:
+      console.log(action.payload);
+      return { ...action.payload };
+    default:
       return state;
   }
-  
 }

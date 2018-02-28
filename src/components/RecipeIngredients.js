@@ -3,6 +3,7 @@ import { Button } from './StyledComponents';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import { styles } from './RecipeIngredients_style';
 import { deleteRecipe } from '../actions/'; 
 
 class RecipeIngredients extends Component {
@@ -24,17 +25,17 @@ class RecipeIngredients extends Component {
     const { id } = this.props.match.params;
 
     return (
-      <div>
+      <div className={ styles }>
         <Link to={'/'} >
           <Button secondary>Back to recipes</Button>
         </Link>
         <h2>{name}</h2>
-        <Link to={`/edit-recipe/${id}`}>
-          <Button primary onClick={this.handleClick}>Edit recipe</Button>
-        </Link>
         <ul>
           {this.renderIngredients()}
         </ul>
+        <Link to={`/edit-recipe/${id}`}>
+          <Button primary onClick={this.handleClick}>Edit recipe</Button>
+        </Link>
         <Button warning onClick={this.handleDeleteRecipe}>Delete recipe</Button>  
       </div>
     );

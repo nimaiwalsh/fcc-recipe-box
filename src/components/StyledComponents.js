@@ -9,6 +9,8 @@ export const Container = styled('div')({
 
 export const Button = styled('button')( props => ({
   color: '#F2F3EE',
+  border: 'none',
+  marginTop: '10px',
   padding: '10px',
   borderRadius: '10px',
   display: 'block',

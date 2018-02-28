@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { css } from 'react-emotion';
 import { Link } from 'react-router-dom';
 import { CSSTransitionGroup } from 'react-transition-group';
 
-import { Button, Button2 } from './StyledComponents';
+import { styles, transitionStyles } from './AddEditRecipe_style';
+import { Button } from './StyledComponents';
 import { addRecipe, updateRecipe } from '../actions/index';
 
 class AddEditRecipe extends Component {
@@ -74,7 +74,7 @@ class AddEditRecipe extends Component {
     return error;
   };
 
-  addUpdateRecipe = (addOrUpdate) => {
+  addUpdateRecipe = addOrUpdate => {
     const { recipeName, ingredientList } = this.state;
     const existingRecipeKey = this.props.match.params.id;
     const error = this.submissionValidation();
@@ -88,9 +88,14 @@ class AddEditRecipe extends Component {
       });
     }
     if (addOrUpdate === 'update') {
-      this.props.updateRecipe(existingRecipeKey, recipeName, ingredientList, () => {
-        this.props.history.push(`/${existingRecipeKey}`)
-      });
+      this.props.updateRecipe(
+        existingRecipeKey,
+        recipeName,
+        ingredientList,
+        () => {
+          this.props.history.push(`/${existingRecipeKey}`);
+        }
+      );
     }
   };
 
@@ -122,14 +127,20 @@ class AddEditRecipe extends Component {
               {this.renderIngredients()}
             </CSSTransitionGroup>
           </ul>
-          <input
-            name="ingredient"
-            onChange={this.handleIngredientInput}
-            value={this.state.item}
-          />
+          <div className='add-ingredient'>
+            <input
+              name="ingredient"
+              onChange={this.handleIngredientInput}
+              value={this.state.item}
+            />
+            <Button secondary onClick={this.addIngredient}>
+              Add ingredient
+            </Button>
+          </div>
           <div className="ingredient-error">{this.state.warning}</div>
-          <Button onClick={this.addIngredient}>Add ingredient</Button>
-          <Button primary onClick={() => this.addUpdateRecipe(addOrUpdate)}>{addOrUpdate} recipe</Button>
+          <Button primary onClick={() => this.addUpdateRecipe(addOrUpdate)}>
+            {addOrUpdate} recipe
+          </Button>
           <div className="submission-error">{this.state.submissionError}</div>
         </div>
       </div>
@@ -138,27 +149,3 @@ class AddEditRecipe extends Component {
 }
 
 export default connect(null, { addRecipe, updateRecipe })(AddEditRecipe);
-
-const styles = css({
-  '& .ingredient .delete': {
-    display: 'inline',
-    backgroundColor: 'red'
-  }
-});
-
-const transitionStyles = css({
-  '& .fade-enter': {
-    opacity: '0'
-  },
-  '& .fade-enter.fade-enter-active': {
-    opacity: '1',
-    transition: 'opacity 500ms ease-in'
-  },
-  '& .fade-leave': {
-    opacity: '1'
-  },
-  '& .fade-leave.fade-leave-active': {
-    opacity: '0',
-    transition: 'opacity 300ms ease-in'
-  }
-});

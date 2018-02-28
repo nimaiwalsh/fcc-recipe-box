@@ -15,7 +15,7 @@ class RecipeList extends Component {
         <Link key={key} to={`/${key}`}>
           <li key={key}>
             {item.name}
-            <img class='svg' src={icons.arrow} />
+            <img className='svg' src={icons.arrow} alt='arrow icon' />
           </li>
         </Link>
       );
