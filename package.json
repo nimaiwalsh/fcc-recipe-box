@@ -1,10 +1,10 @@
 {
   "name": "fcc-recipe-box",
+  "homepage": "https://nimaiwalsh.github.io/fcc-recipe-box",
   "author": {
     "name": "Nimai Walsh",
     "url": "http://www.nimaiwalsh.com"
   },
-  "homepage": "https://nimaiwalsh.github.io/fcc-recipe-box",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

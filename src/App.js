@@ -27,7 +27,7 @@ class App extends Component {
       <div className={styles}>
         <h1>Recipe Box</h1>
         <Container>
-          <BrowserRouter>
+          <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Switch>
               <Route path='/add-recipe' component={AddEditRecipe} />
               <Route

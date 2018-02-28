@@ -19,3 +19,7 @@ A recipe box used to store your favourite recipes. It alows you to add/remove re
 ### Challenges
 1. Getting familiar with Redux data flow and methods.
 2. The whole concept of CSS-in-JS.
+
+###Tips:
+Use 'basename' property in React Routers - Browser Router to ensure routes work correctly on your hosted service.
+<BrowserRouter basename={process.env.PUBLIC_URL} >
