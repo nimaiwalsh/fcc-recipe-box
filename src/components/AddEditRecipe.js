@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { CSSTransitionGroup } from 'react-transition-group';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import { styles, transitionStyles } from './AddEditRecipe_style';
 import { Button } from './StyledComponents';
@@ -23,12 +23,16 @@ class AddEditRecipe extends Component {
   renderIngredients = () => {
     return this.state.ingredientList.map((item, key) => {
       return (
-        <li key={key} className="ingredient">
-          {item}{' '}
-          <div className="delete" onClick={() => this.deleteIngredient(key)}>
-            x
-          </div>
-        </li>
+        <CSSTransition
+          key={item}
+          classNames="fade"
+          timeout={{enter: 1000, exit: 500}}
+        >
+          <li className="ingredient">
+            {item}
+            <div className="delete" onClick={() => this.deleteIngredient(key)}>x</div>
+          </li>
+        </CSSTransition>
       );
     });
   };
@@ -55,9 +59,9 @@ class AddEditRecipe extends Component {
   };
 
   deleteIngredient = key => {
-    const { ingredientList } = this.state;
-    ingredientList.splice(key, 1);
-    this.setState({ ingredientList });
+    let newIngredientList = this.state.ingredientList.slice();
+    newIngredientList.splice(key, 1);
+    this.setState({ ingredientList: newIngredientList });
   };
 
   submissionValidation = () => {
@@ -118,14 +122,9 @@ class AddEditRecipe extends Component {
           />
           <h3>Ingredients</h3>
           <ul>
-            <CSSTransitionGroup
-              className={transitionStyles}
-              transitionName="fade"
-              transitionEnterTimeout={500}
-              transitionLeaveTimeout={300}
-            >
+            <TransitionGroup className={transitionStyles}>
               {this.renderIngredients()}
-            </CSSTransitionGroup>
+            </TransitionGroup>
           </ul>
           <div className='add-ingredient'>
             <input

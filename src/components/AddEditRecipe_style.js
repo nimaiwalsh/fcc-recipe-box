@@ -34,7 +34,7 @@ export const styles = css({
     margin: '0',
     padding: '0'
   },
-  '& ul > span > li': {
+  '& ul > div > li': {
     border: '2px solid #CC8F85',
     padding: '3px 5px',
     marginTop: '5px',
@@ -48,13 +48,13 @@ export const transitionStyles = css({
   },
   '& .fade-enter.fade-enter-active': {
     opacity: '1',
-    transition: 'opacity 500ms ease-in'
+    transition: 'opacity 1000ms ease-in'
   },
-  '& .fade-leave': {
+  '& .fade-exit': {
     opacity: '1'
   },
-  '& .fade-leave.fade-leave-active': {
+  '& .fade-exit.fade-exit-active': {
     opacity: '0',
-    transition: 'opacity 300ms ease-in'
+    transition: 'opacity 500ms ease-in'
   }
 });
